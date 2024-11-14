@@ -1,5 +1,6 @@
 package com.example.api_coinpaprika
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,39 +10,39 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import com.example.api_coinpaprika.presentation.coin_list.CoinDetailViewModel
+import com.example.api_coinpaprika.presentation.coin_list.CoinListViewModel
 import com.example.api_coinpaprika.ui.theme.ApicoinpaprikaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            ApicoinpaprikaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            MainScreen()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MainScreen() {
+    var selectedCoinId by remember { mutableStateOf<String?>(null) }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ApicoinpaprikaTheme {
-        Greeting("Android")
+    if (selectedCoinId == null) {
+        val coinListViewModel: CoinListViewModel = viewModel()
+        CoinListScreen(coinListViewModel) { coinId ->
+            selectedCoinId = coinId
+        }
+    } else {
+        val coinDetailViewModel: CoinDetailViewModel = viewModel()
+        CoinDetailScreen(coinDetailViewModel, selectedCoinId!!) {
+            selectedCoinId = null
+        }
     }
 }
