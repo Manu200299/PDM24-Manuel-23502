@@ -8,14 +8,13 @@ import com.example.api_coinpaprika.domain.model.Coin
 import com.example.api_coinpaprika.domain.use_case.GetCoinsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class CoinListViewModel : ViewModel() {
     private val api = RetrofitInstance.api
     private val repository = CoinRepositoryImpl(api)
     private val getCoinsUseCase = GetCoinsUseCase(repository)
 
-    val coins = MutableStateFlow<List<Coin>>(emtpyList())
+    val coins = MutableStateFlow<List<Coin>>(emptyList())
 
     fun fetchCoins() {
         viewModelScope.launch {

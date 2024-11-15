@@ -8,7 +8,6 @@ import com.example.api_coinpaprika.domain.model.CoinDetail
 import com.example.api_coinpaprika.domain.use_case.GetCoinDetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-
 class CoinDetailViewModel : ViewModel() {
     private val api = RetrofitInstance.api
     private val repository = CoinRepositoryImpl(api)
