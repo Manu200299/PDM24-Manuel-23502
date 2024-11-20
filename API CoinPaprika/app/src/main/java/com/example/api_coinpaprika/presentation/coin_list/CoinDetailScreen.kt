@@ -20,12 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil3.compose.AsyncImage
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun CoinDetailScreen(
     coinId: String,
@@ -54,15 +55,24 @@ fun CoinDetailScreen(
                     .padding(16.dp)
             ) {
                 // Header coin logo
-                AsyncImage(
+                GlideImage(
                     model = detail.logo,
-                    contentDescription = "${detail.name} logo",
+                    contentDescription = "logo",
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(50.dp)
                         .clip(CircleShape)
                         .background(Color.White),
-                    contentScale = ContentScale.Crop,
                 )
+
+//                AsyncImage(
+//                    model = detail.logo,
+//                    contentDescription = "${detail.name} logo",
+//                    modifier = Modifier
+//                        .size(40.dp)
+//                        .clip(CircleShape)
+//                        .background(Color.White),
+//                    contentScale = ContentScale.Crop,
+//                )
                 // Header text
                 Text(
                     text = detail.name,

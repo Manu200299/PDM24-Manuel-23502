@@ -62,7 +62,7 @@ fun CoinListScreen(
                 text = "Cryptocurrencies List",
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.headlineMedium)
+                style = MaterialTheme.typography.headlineSmall)
         }
         LazyColumn(
             modifier = Modifier
