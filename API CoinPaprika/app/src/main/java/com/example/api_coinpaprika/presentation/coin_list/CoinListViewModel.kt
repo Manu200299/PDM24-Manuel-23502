@@ -1,5 +1,3 @@
-package com.example.api_coinpaprika.presentation.coin_list
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.api_coinpaprika.data.remote.api.RetrofitInstance
@@ -9,7 +7,8 @@ import com.example.api_coinpaprika.domain.use_case.GetCoinsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class CoinListViewModel : ViewModel() {
+// UI para listar as moedas
+class CoinListViewModel: ViewModel() {
     private val api = RetrofitInstance.api
     private val repository = CoinRepositoryImpl(api)
     private val getCoinsUseCase = GetCoinsUseCase(repository)
@@ -18,7 +17,7 @@ class CoinListViewModel : ViewModel() {
 
     fun fetchCoins() {
         viewModelScope.launch {
-            try {
+            try{
                 coins.value = getCoinsUseCase()
             } catch (e: Exception) {
                 coins.value = emptyList()
@@ -26,3 +25,4 @@ class CoinListViewModel : ViewModel() {
         }
     }
 }
+
