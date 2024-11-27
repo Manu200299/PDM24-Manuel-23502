@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "coin_list") {
+    NavHost(navController = navController, startDestination = "coin_limhst") {
         composable("coin_list") {
             CoinListScreen(onCoinClick = { coinId ->
                 navController.navigate("coin_detail/$coinId")
@@ -65,7 +65,7 @@ fun AppNavigation() {
     }
 }
 
-
+// These are examples of Compose components that could be used
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrationForm() {

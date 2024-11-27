@@ -63,16 +63,6 @@ fun CoinDetailScreen(
                         .clip(CircleShape)
                         .background(Color.White),
                 )
-
-//                AsyncImage(
-//                    model = detail.logo,
-//                    contentDescription = "${detail.name} logo",
-//                    modifier = Modifier
-//                        .size(40.dp)
-//                        .clip(CircleShape)
-//                        .background(Color.White),
-//                    contentScale = ContentScale.Crop,
-//                )
                 // Header text
                 Text(
                     text = detail.name,
