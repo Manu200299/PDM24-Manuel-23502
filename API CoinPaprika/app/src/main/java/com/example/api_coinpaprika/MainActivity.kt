@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "coin_limhst") {
+    NavHost(navController = navController, startDestination = "coin_list") {
         composable("coin_list") {
             CoinListScreen(onCoinClick = { coinId ->
                 navController.navigate("coin_detail/$coinId")
