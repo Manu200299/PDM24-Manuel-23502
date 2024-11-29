@@ -139,11 +139,11 @@ fun NewsItem(news: News, onClick: () -> Unit){
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = news.name,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+//                    Text( -> Not working due to "source" on JSON response
+//                        text = news.name,
+//                        style = MaterialTheme.typography.bodySmall,
+//                        color = MaterialTheme.colorScheme.onSurfaceVariant
+//                    )
 
                     Text(
 //                        text = "${ChronoUnit.MINUTES.between(news.publishedAt, Instant.now())} minutes ago",
