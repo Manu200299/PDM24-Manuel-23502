@@ -9,7 +9,7 @@ data class User(
     val userID: Int,
     val username: String,
     val email: String,
-    val token: Int,
+    val token: String,
     val createdAt: String,
     val updatedAt: String,
     val password: String
@@ -31,10 +31,13 @@ data class UserAdd(
 // Model to login user
 data class UserLogin(
     val username: String,
-//    val token: Int,
     val password: String,
 ) {
     fun toUserLoginDto(): UserLoginDto {
         return UserLoginDto(username = username, password = password)
     }
 }
+
+data class UserLoginResponse(
+    val token: String
+)

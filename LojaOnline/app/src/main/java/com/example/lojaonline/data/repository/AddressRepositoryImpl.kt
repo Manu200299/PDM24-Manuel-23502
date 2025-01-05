@@ -7,7 +7,7 @@ import com.example.lojaonline.domain.model.Address
 import com.example.lojaonline.domain.repository.AddressRepository
 import okhttp3.Response
 
-class AddressRepositoryImpl(private val api: LojaOnlineApi, private val context: Context): AddressRepository {
+class AddressRepositoryImpl(private val api: LojaOnlineApi): AddressRepository {
 
     override suspend fun addAddress(addAddress: Address) {
         val addAddressDto = addAddress.toAddressDto()

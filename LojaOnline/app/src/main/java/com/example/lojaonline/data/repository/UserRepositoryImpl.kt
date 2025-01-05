@@ -1,13 +1,17 @@
 package com.example.lojaonline.data.repository
 
 import android.util.Log
+import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.data.remote.api.LojaOnlineApi
 import com.example.lojaonline.domain.model.User
 import com.example.lojaonline.domain.model.UserAdd
 import com.example.lojaonline.domain.model.UserLogin
 import com.example.lojaonline.domain.repository.UserRepository
 
-class UserRepositoryImpl(private val api: LojaOnlineApi): UserRepository {
+class UserRepositoryImpl(
+    private val api: LojaOnlineApi,
+    private val sessionManager: SessionManager
+    ): UserRepository {
 
     override suspend fun getUsers(): List<User> {
         val userDtos = api.getUsers()
@@ -23,11 +27,6 @@ class UserRepositoryImpl(private val api: LojaOnlineApi): UserRepository {
     override  suspend fun addUser(addUser: UserAdd) {
         val addUserDto = addUser.toUserAddDto()
         val response = api.addUser(addUserDto)
-
-        if (response.isSuccessful) {
-
-        }
-
         if (response.isSuccessful) {
             Log.d("UserRepositoryImpl", "User created successfully: $addUserDto")
         } else {
@@ -42,7 +41,11 @@ class UserRepositoryImpl(private val api: LojaOnlineApi): UserRepository {
         val loginUserDto = loginUser.toUserLoginDto()
         val response = api.loginUser(loginUserDto)
         if (response.isSuccessful){
-            Log.d("UserRepositoryImpl", "Logged in successfully: $loginUserDto")
+            val loginResponse = response.body()
+            loginResponse?.token?.let { token ->
+                sessionManager.saveUserToken(token)
+            }
+            Log.d("UserRepositoryImpl", "Logged in successfully and saved token: $loginUserDto | $loginResponse")
         } else {
             val statusCode = response.code()
             val errorMessage = response.errorBody()?.string() ?: "Unknown error"

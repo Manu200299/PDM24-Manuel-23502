@@ -1,14 +1,14 @@
 package com.example.lojaonline.domain.use_case
 
 import android.util.Log
+import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.data.repository.UserRepositoryImpl
 import com.example.lojaonline.domain.model.User
 import com.example.lojaonline.domain.model.UserAdd
 import com.example.lojaonline.domain.model.UserLogin
 
 class LoginUserUseCase(private val repository: UserRepositoryImpl) {
-
-    suspend operator fun invoke(userLogin: UserLogin){
+    suspend operator fun invoke(userLogin: UserLogin) {
         repository.loginUser(userLogin)
         Log.d("UseCase", "Logging in user: $userLogin")
     }

@@ -1,23 +1,39 @@
+package com.example.lojaonline.presentation
+
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.UserLogin
-import com.example.lojaonline.presentation.LoginUserViewModel
-import kotlin.math.log
+
 
 @Composable
 fun LoginUserScreen(
-//    onLoginClick: () -> Unit)
-viewModel: LoginUserViewModel = viewModel()
-    ){
+//    onLoginSuccess: () -> Unit
+) {
+    val context = LocalContext.current
+    val sessionManager = remember { SessionManager(context) }
+    val viewModel: LoginUserViewModel = viewModel(
+        factory = LoginUserViewModel.Factory(sessionManager)
+    )
+
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-//    val loginResult by viewModel.loginResult
+    val loginState by viewModel.loginState.collectAsState()
+
+    LaunchedEffect(loginState) {
+        if (loginState is LoginState.Success) {
+//            onLoginSuccess()
+            Log.d("Screen", "Login Successful")
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -53,16 +69,24 @@ viewModel: LoginUserViewModel = viewModel()
 
         Button(
             onClick = {
-              val loginUser = UserLogin(
-                  username = username,
-//                  token = 0,  // Api jwt token support maybe implement later or not
-                  password = password
-              )
+                val loginUser = UserLogin(
+                    username = username,
+                    password = password
+                )
                 viewModel.loginUser(loginUser)
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            enabled = loginState !is LoginState.Loading
         ) {
-            Text("Login")
+            Text(if (loginState is LoginState.Loading) "Logging in..." else "Login")
+        }
+
+        if (loginState is LoginState.Error) {
+            Text(
+                text = (loginState as LoginState.Error).message,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
     }
 }

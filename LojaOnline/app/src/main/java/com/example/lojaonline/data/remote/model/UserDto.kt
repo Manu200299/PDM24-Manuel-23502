@@ -1,12 +1,13 @@
 package com.example.lojaonline.data.remote.model
 
 import com.example.lojaonline.domain.model.User
+import com.example.lojaonline.domain.model.UserLoginResponse
 
 data class UserDto(
     val userID: Int,
     val username: String,
     val email: String,
-    val token: Int,
+    val token: String,
     val createdAt: String,
     val updatedAt: String,
     val password: String
@@ -19,9 +20,16 @@ data class UserDto(
 // Dto model to login user
 data class UserLoginDto(
     val username: String,
-//    val token: Int,
     val password: String
 )
+
+data class UserLoginResponseDto(
+    val token: String
+){
+    fun toUserLoginResponse(): UserLoginResponse{
+        return UserLoginResponse(token=token)
+    }
+}
 
 
 // Dto model to add user

@@ -1,12 +1,11 @@
 package com.example.lojaonline
 
-import LoginUserScreen
-import RegisterUserScreen
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import com.example.lojaonline.presentation.LoginUserScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
 
 class MainActivity : ComponentActivity() {

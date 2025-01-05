@@ -61,9 +61,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.logging.interceptor)
-    implementation(libs.androidx.datastore.core.android)
-    implementation(libs.androidx.datastore.preferences.core.jvm)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.javax.inject)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.runtime.ktx.v287)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -72,3 +74,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
