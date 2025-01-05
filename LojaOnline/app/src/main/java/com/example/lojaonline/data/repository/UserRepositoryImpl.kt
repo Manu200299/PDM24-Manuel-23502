@@ -23,6 +23,11 @@ class UserRepositoryImpl(private val api: LojaOnlineApi): UserRepository {
     override  suspend fun addUser(addUser: UserAdd) {
         val addUserDto = addUser.toUserAddDto()
         val response = api.addUser(addUserDto)
+
+        if (response.isSuccessful) {
+
+        }
+
         if (response.isSuccessful) {
             Log.d("UserRepositoryImpl", "User created successfully: $addUserDto")
         } else {

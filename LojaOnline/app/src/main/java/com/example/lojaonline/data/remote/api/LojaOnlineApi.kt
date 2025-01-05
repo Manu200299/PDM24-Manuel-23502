@@ -1,6 +1,7 @@
 package com.example.lojaonline.data.remote.api
 
 
+import com.example.lojaonline.data.remote.model.AddressDto
 import com.example.lojaonline.data.remote.model.UserAddDto
 import com.example.lojaonline.data.remote.model.UserDto
 import com.example.lojaonline.data.remote.model.UserLoginDto
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-
+import retrofit2.http.Path
 
 
 object RetrofitInstance{
@@ -32,4 +33,10 @@ interface LojaOnlineApi {
 
     @POST("login/login")
     suspend fun loginUser(@Body userLoginDto: UserLoginDto): Response<Unit>
+
+    @POST("address/addAddressToUser/{id}")
+    suspend fun addAddressToUser(
+        @Path("id") userId: String,
+        @Body addAddressDto: AddressDto
+    ): Response<Void>
 }

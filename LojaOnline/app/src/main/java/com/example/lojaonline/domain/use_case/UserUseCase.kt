@@ -7,6 +7,7 @@ import com.example.lojaonline.domain.model.UserAdd
 import com.example.lojaonline.domain.model.UserLogin
 
 class LoginUserUseCase(private val repository: UserRepositoryImpl) {
+
     suspend operator fun invoke(userLogin: UserLogin){
         repository.loginUser(userLogin)
         Log.d("UseCase", "Logging in user: $userLogin")

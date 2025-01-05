@@ -17,7 +17,7 @@ viewModel: LoginUserViewModel = viewModel()
     ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val loginResult by viewModel.loginResult
+//    val loginResult by viewModel.loginResult
 
     Column(
         modifier = Modifier
@@ -55,7 +55,7 @@ viewModel: LoginUserViewModel = viewModel()
             onClick = {
               val loginUser = UserLogin(
                   username = username,
-//                  token = 0,
+//                  token = 0,  // Api jwt token support maybe implement later or not
                   password = password
               )
                 viewModel.loginUser(loginUser)
