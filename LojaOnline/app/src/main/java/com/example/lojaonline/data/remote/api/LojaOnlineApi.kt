@@ -6,11 +6,13 @@ import com.example.lojaonline.data.remote.model.UserAddDto
 import com.example.lojaonline.data.remote.model.UserDto
 import com.example.lojaonline.data.remote.model.UserLoginDto
 import com.example.lojaonline.data.remote.model.UserLoginResponseDto
+import com.example.lojaonline.domain.model.User
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -28,6 +30,9 @@ object RetrofitInstance{
 interface LojaOnlineApi {
     @GET("user/getAllUser")
     suspend fun getUsers(): List<UserDto>
+
+    @GET("user/getUserById/{id}")
+    suspend fun getUserById(@Path("id") userId: Int): Response<UserDto>
 
     @POST("user/addUser")
     suspend fun addUser(@Body userAddDto: UserAddDto): Response<Unit>

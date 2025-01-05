@@ -39,5 +39,6 @@ data class UserLogin(
 }
 
 data class UserLoginResponse(
+    val userID: Int,
     val token: String
 )

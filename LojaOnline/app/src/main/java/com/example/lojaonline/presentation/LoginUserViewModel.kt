@@ -9,6 +9,7 @@ import com.example.lojaonline.data.remote.api.RetrofitInstance
 import com.example.lojaonline.data.repository.UserRepositoryImpl
 import com.example.lojaonline.domain.model.UserLogin
 import com.example.lojaonline.domain.use_case.LoginUserUseCase
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +30,9 @@ class LoginUserViewModel(
         viewModelScope.launch {
             _loginState.value = LoginState.Loading
             try {
-                loginUserUseCase(loginUser)
+                val loginResponse = loginUserUseCase(loginUser)
+//                sessionManager.saveUserToken(loginResponse.token)
+//                sessionManager.saveUserId(loginResponse.userId)
                 _loginState.value = LoginState.Success
                 Log.d("UserLoginViewModel", "Logging in user: $loginUser")
             } catch (e: Exception) {
@@ -39,7 +42,7 @@ class LoginUserViewModel(
         }
     }
 
-    val userToken = sessionManager.userToken
+    val userToken: Flow<String?> = sessionManager.userToken
 
     class Factory(private val sessionManager: SessionManager) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

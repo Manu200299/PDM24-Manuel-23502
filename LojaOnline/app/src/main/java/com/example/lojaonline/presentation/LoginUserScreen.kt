@@ -16,7 +16,7 @@ import com.example.lojaonline.domain.model.UserLogin
 
 @Composable
 fun LoginUserScreen(
-//    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit
 ) {
     val context = LocalContext.current
     val sessionManager = remember { SessionManager(context) }
@@ -30,7 +30,7 @@ fun LoginUserScreen(
 
     LaunchedEffect(loginState) {
         if (loginState is LoginState.Success) {
-//            onLoginSuccess()
+            onLoginSuccess()
             Log.d("Screen", "Login Successful")
         }
     }

@@ -24,10 +24,11 @@ data class UserLoginDto(
 )
 
 data class UserLoginResponseDto(
+    val userID: Int,
     val token: String
 ){
     fun toUserLoginResponse(): UserLoginResponse{
-        return UserLoginResponse(token=token)
+        return UserLoginResponse(userID = userID, token =token)
     }
 }
 
