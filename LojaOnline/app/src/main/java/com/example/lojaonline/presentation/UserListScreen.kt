@@ -1,5 +1,6 @@
 package com.example.lojaonline.presentation
 
+import RegisterUserViewModel
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
@@ -91,7 +92,7 @@ fun UserListScreen(
                 val formattedDateTime = currentDateTime.format(formatter)
                 val parsedDate = formattedDateTime
                 val newUser = UserAdd(username = "testandroid", email = "testeandroid@foda-se.com", password = "testeandroid", createdAt = formattedDateTime, updatedAt = formattedDateTime)
-                viewModelAdd.addUser(newUser)
+                viewModelAdd.registerUser(newUser)
             },
             modifier = Modifier.padding(16.dp)
                 .background(color = Color.Black)

@@ -1,5 +1,6 @@
 package com.example.lojaonline
 
+import RegisterUserScreen
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,6 +19,8 @@ import com.example.lojaonline.presentation.LoginUserScreen
 import com.example.lojaonline.presentation.UserProfileScreen
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -45,6 +48,11 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate("profile") {
                                     popUpTo("login") { inclusive = true }
                                 }
+                            },
+                            onRegisterClick = {
+                                navController.navigate("register"){
+                                    popUpTo("login") {inclusive = true }
+                                }
                             }
                         )
                     }
@@ -58,9 +66,28 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+                    composable("register"){
+                        RegisterUserScreen(
+                            sessionManager = sessionManager,
+                            onRegisterSuccess = {
+                                navController.navigate("login"){
+                                    popUpTo("register") { inclusive = true }
+                                }
+                            },
+                            onBackToLogin = {
+                                navController.navigateUp()
+                            }
+                        )
+                    }
                 }
             }
         }
     }
 }
 
+
+
+val currentDateTime = LocalDateTime.now()
+val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+val formattedDateTime = currentDateTime.format(formatter)
+val parsedDate = formattedDateTime

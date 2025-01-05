@@ -9,23 +9,28 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.UserAdd
-import com.example.lojaonline.presentation.RegisterUserViewModel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RegisterUserScreen(
-//    onRegisterClick: (String, String, String) -> Unit,
-//    onLoginClick: () -> Unit,
-    viewModel: RegisterUserViewModel = viewModel()
-    ) {
+    onRegisterSuccess: () -> Unit,
+    onBackToLogin: () -> Unit,
+    sessionManager: SessionManager
+) {
+    val viewModel: RegisterUserViewModel = viewModel(
+        factory = RegisterUserViewModel.Factory(sessionManager)
+    )
+
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    var showError by remember { mutableStateOf(false) }
+
+    val registerState by viewModel.registerState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -76,27 +81,17 @@ fun RegisterUserScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        if (showError) {
-            Text(
-                text = "Passwords do not match",
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-        }
-
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
             onClick = {
-
-                // Fetching current date on click
-                val currentDateTime = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-                val formattedDateTime = currentDateTime.format(formatter)
-                val parsedDate = formattedDateTime
-
                 if (password == confirmPassword) {
+
+                    val currentDateTime = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+                    val formattedDateTime = currentDateTime.format(formatter)
+                    val parsedDate = formattedDateTime
+
                     val userAdd = UserAdd(
                         username = username,
                         email = email,
@@ -104,10 +99,9 @@ fun RegisterUserScreen(
                         createdAt = parsedDate,
                         updatedAt = parsedDate
                     )
-                    viewModel.addUser(userAdd)
-//                    onRegisterClick(username, email, password)
+                    viewModel.registerUser(userAdd)
                 } else {
-                    showError = true
+                    // Show error message for password mismatch
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -117,15 +111,26 @@ fun RegisterUserScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-//        TextButton(
-//            onClick = onLoginClick,
-//            modifier = Modifier.fillMaxWidth()
-//        ) {
-//            Text(
-//                text = "Already have an account? Log in",
-//                textAlign = TextAlign.Center
-//            )
-//        }
+        TextButton(
+            onClick = onBackToLogin
+        ) {
+            Text("Already have an account? Click here to login")
+        }
+
+        if (registerState is RegisterState.Loading) {
+            CircularProgressIndicator()
+        } else if (registerState is RegisterState.Error) {
+            Text(
+                text = (registerState as RegisterState.Error).message,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        }
+    }
+
+    LaunchedEffect(registerState) {
+        if (registerState is RegisterState.Success) {
+            onRegisterSuccess()
+        }
     }
 }
-

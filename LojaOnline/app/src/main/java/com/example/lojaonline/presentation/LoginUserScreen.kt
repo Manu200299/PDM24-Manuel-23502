@@ -16,7 +16,8 @@ import com.example.lojaonline.domain.model.UserLogin
 
 @Composable
 fun LoginUserScreen(
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit
 ) {
     val context = LocalContext.current
     val sessionManager = remember { SessionManager(context) }
@@ -87,6 +88,14 @@ fun LoginUserScreen(
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(top = 16.dp)
             )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TextButton(
+            onClick = onRegisterClick
+        ) {
+            Text("Don't have an account? Click here to register")
         }
     }
 }
