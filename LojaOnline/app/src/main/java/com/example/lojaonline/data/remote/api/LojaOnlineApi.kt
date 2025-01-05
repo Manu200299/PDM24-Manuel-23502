@@ -42,7 +42,7 @@ interface LojaOnlineApi {
 
     @POST("address/addAddressToUser/{id}")
     suspend fun addAddressToUser(
-//        @Path("id") userId: String,
+        @Path("id") userId: Int,
         @Body addAddressDto: AddressDto
     ): Response<Void>
 }

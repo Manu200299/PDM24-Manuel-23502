@@ -6,8 +6,8 @@ import com.example.lojaonline.domain.model.Address
 
 class AddressUseCase(private val repository: AddressRepositoryImpl) {
 
-    suspend operator fun invoke(addAddress: Address){
-        repository.addAddress(addAddress)
+    suspend operator fun invoke(userId: Int ,addAddress: Address){
+        repository.addAddress(userId, addAddress)
         Log.d("UseCase", "Adding address: $addAddress")
     }
 }

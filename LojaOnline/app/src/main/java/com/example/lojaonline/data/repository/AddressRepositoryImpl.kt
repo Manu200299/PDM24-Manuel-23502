@@ -9,9 +9,9 @@ import okhttp3.Response
 
 class AddressRepositoryImpl(private val api: LojaOnlineApi): AddressRepository {
 
-    override suspend fun addAddress(addAddress: Address) {
+    override suspend fun addAddress(userId: Int ,addAddress: Address) {
         val addAddressDto = addAddress.toAddressDto()
-        val response = api.addAddressToUser(addAddressDto)
+        val response = api.addAddressToUser(userId, addAddress.toAddressDto())
         if (response.isSuccessful){
             Log.d("UserRepositoryImpl", "User created successfully: $addAddressDto")
         } else  {

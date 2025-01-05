@@ -12,7 +12,8 @@ import com.example.lojaonline.data.local.SessionManager
 @Composable
 fun UserProfileScreen(
     sessionManager: SessionManager,
-    onLogout: () -> Unit
+    onLogout: () -> Unit,
+    onAddAddressClick: () -> Unit
 ) {
     val viewModel: UserProfileViewModel = viewModel(
         factory = UserProfileViewModel.Factory(sessionManager)
@@ -36,6 +37,13 @@ fun UserProfileScreen(
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 Button(
+                    onClick = onAddAddressClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Add Address")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
                     onClick = {
                         viewModel.logout()
                         onLogout()
@@ -52,5 +60,6 @@ fun UserProfileScreen(
         }
     }
 }
+
 
 

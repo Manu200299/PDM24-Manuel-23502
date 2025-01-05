@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import com.example.lojaonline.presentation.LoginUserScreen
 import com.example.lojaonline.presentation.UserProfileScreen
 import com.example.lojaonline.data.local.SessionManager
+import com.example.lojaonline.presentation.AddAddressScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -63,6 +64,9 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate("login") {
                                     popUpTo("profile") { inclusive = true }
                                 }
+                            },
+                            onAddAddressClick = {
+                                navController.navigate("addAddress")
                             }
                         )
                     }
@@ -79,15 +83,16 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+                    composable("addAddress"){
+                        AddAddressScreen(
+                            sessionManager = sessionManager,
+                            onAddressAdded = {
+                                navController.navigateUp()
+                            },
+                        )
+                    }
                 }
             }
         }
     }
 }
-
-
-
-val currentDateTime = LocalDateTime.now()
-val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-val formattedDateTime = currentDateTime.format(formatter)
-val parsedDate = formattedDateTime
