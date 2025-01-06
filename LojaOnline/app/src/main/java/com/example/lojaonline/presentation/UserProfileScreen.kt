@@ -13,7 +13,9 @@ import com.example.lojaonline.data.local.SessionManager
 fun UserProfileScreen(
     sessionManager: SessionManager,
     onLogout: () -> Unit,
-    onAddAddressClick: () -> Unit
+    onAddAddressClick: () -> Unit,
+    onAddProductsClick: () -> Unit,
+    onProductsClick: () -> Unit,
 ) {
     val viewModel: UserProfileViewModel = viewModel(
         factory = UserProfileViewModel.Factory(sessionManager)
@@ -41,6 +43,19 @@ fun UserProfileScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Add Address")
+                }
+                Button(
+                    onClick = onAddProductsClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Add Products")
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+                Button(
+                    onClick = onProductsClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("View Products")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(

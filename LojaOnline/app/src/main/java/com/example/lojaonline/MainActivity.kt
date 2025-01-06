@@ -19,6 +19,8 @@ import com.example.lojaonline.presentation.LoginUserScreen
 import com.example.lojaonline.presentation.UserProfileScreen
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.presentation.AddAddressScreen
+import com.example.lojaonline.presentation.AddProductScreen
+import com.example.lojaonline.presentation.ProductListScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -67,6 +69,12 @@ class MainActivity : ComponentActivity() {
                             },
                             onAddAddressClick = {
                                 navController.navigate("addAddress")
+                            },
+                            onProductsClick = {
+                                navController.navigate("productList")
+                            },
+                            onAddProductsClick = {
+                                navController.navigate("addProduct")
                             }
                         )
                     }
@@ -89,6 +97,22 @@ class MainActivity : ComponentActivity() {
                             onAddressAdded = {
                                 navController.navigateUp()
                             },
+                        )
+                    }
+                    composable("productList") {
+                        ProductListScreen(
+                            onAddProductClick = {
+                                navController.navigate("addProduct")
+                            },
+                            sessionManager = sessionManager
+                        )
+                    }
+                    composable("addProduct") {
+                        AddProductScreen(
+                            onProductAdded = {
+                                navController.navigateUp()
+                            },
+                            sessionManager = sessionManager
                         )
                     }
                 }

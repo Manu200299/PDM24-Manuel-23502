@@ -1,7 +1,9 @@
 package com.example.lojaonline.data.remote.api
 
 
+import com.example.lojaonline.data.remote.model.AddProductDto
 import com.example.lojaonline.data.remote.model.AddressDto
+import com.example.lojaonline.data.remote.model.ProductDto
 import com.example.lojaonline.data.remote.model.UserAddDto
 import com.example.lojaonline.data.remote.model.UserDto
 import com.example.lojaonline.data.remote.model.UserLoginDto
@@ -45,4 +47,10 @@ interface LojaOnlineApi {
         @Path("id") userId: Int,
         @Body addAddressDto: AddressDto
     ): Response<Void>
+
+    @GET("product/getAllProduct")
+    suspend fun getAllProducts(): Response<List<ProductDto>>
+
+    @POST("product/addProduct")
+    suspend fun addProduct(@Body product: AddProductDto): Response<ProductDto>
 }
