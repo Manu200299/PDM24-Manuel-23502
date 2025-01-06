@@ -11,7 +11,7 @@ class AddressRepositoryImpl(private val api: LojaOnlineApi): AddressRepository {
 
     override suspend fun addAddress(userId: Int ,addAddress: Address) {
         val addAddressDto = addAddress.toAddressDto()
-        val response = api.addAddressToUser(userId, addAddress.toAddressDto())
+        val response = api.addAddressToUser(userId, addAddressDto)
         if (response.isSuccessful){
             Log.d("UserRepositoryImpl", "User created successfully: $addAddressDto")
         } else  {

@@ -20,6 +20,7 @@ import com.example.lojaonline.presentation.UserProfileScreen
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.presentation.AddAddressScreen
 import com.example.lojaonline.presentation.AddProductScreen
+import com.example.lojaonline.presentation.CartScreen
 import com.example.lojaonline.presentation.ProductListScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
 import java.time.LocalDateTime
@@ -104,6 +105,9 @@ class MainActivity : ComponentActivity() {
                             onAddProductClick = {
                                 navController.navigate("addProduct")
                             },
+                            onViewCartClick = {
+                                navController.navigate("cart")
+                            },
                             sessionManager = sessionManager
                         )
                     }
@@ -113,6 +117,14 @@ class MainActivity : ComponentActivity() {
                                 navController.navigateUp()
                             },
                             sessionManager = sessionManager
+                        )
+                    }
+                    composable("cart"){
+                        CartScreen(
+                            sessionManager = sessionManager,
+                            onBackClick = {
+                                navController.navigateUp()
+                            }
                         )
                     }
                 }
