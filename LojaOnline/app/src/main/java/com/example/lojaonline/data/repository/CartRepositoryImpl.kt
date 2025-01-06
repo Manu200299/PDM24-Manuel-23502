@@ -30,7 +30,3 @@ class CartRepositoryImpl(private val api: LojaOnlineApi): CartRepository {
         }
     }
 }
-
-// Implement add and getAll cart feature.
-// v0.dev is saying the repository a bit wrong.
-// Ask for same structure as mine

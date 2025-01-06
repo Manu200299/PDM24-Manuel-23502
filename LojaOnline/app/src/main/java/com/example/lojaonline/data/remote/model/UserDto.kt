@@ -37,6 +37,7 @@ data class UserLoginResponseDto(
 data class UserAddDto(
     val username: String,
     val email: String,
+    val token: String,
     val password: String,
     val createdAt: String,
     val updatedAt: String

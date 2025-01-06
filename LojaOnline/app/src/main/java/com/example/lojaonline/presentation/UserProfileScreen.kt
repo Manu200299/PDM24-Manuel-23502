@@ -16,6 +16,7 @@ fun UserProfileScreen(
     onAddAddressClick: () -> Unit,
     onAddProductsClick: () -> Unit,
     onProductsClick: () -> Unit,
+    onViewOrdersClick: () -> Unit,
 ) {
     val viewModel: UserProfileViewModel = viewModel(
         factory = UserProfileViewModel.Factory(sessionManager)
@@ -56,6 +57,13 @@ fun UserProfileScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("View Products")
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+                Button(
+                    onClick = onViewOrdersClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("View All Orders")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(

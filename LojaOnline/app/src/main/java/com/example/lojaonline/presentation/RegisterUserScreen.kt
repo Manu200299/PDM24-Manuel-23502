@@ -96,6 +96,7 @@ fun RegisterUserScreen(
                         username = username,
                         email = email,
                         password = password,
+                        token = "0",
                         createdAt = parsedDate,
                         updatedAt = parsedDate
                     )

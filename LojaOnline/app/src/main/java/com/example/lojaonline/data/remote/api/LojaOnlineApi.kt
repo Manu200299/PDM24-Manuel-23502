@@ -6,15 +6,13 @@ import com.example.lojaonline.data.remote.model.AddToCartDto
 import com.example.lojaonline.data.remote.model.AddressDto
 import com.example.lojaonline.data.remote.model.CartItemDto
 import com.example.lojaonline.data.remote.model.CreateOrderRequestDto
-import com.example.lojaonline.data.remote.model.OrderResponse
+import com.example.lojaonline.data.remote.model.OrderResponseDto
 import com.example.lojaonline.data.remote.model.OrderWithDetailsDto
 import com.example.lojaonline.data.remote.model.ProductDto
 import com.example.lojaonline.data.remote.model.UserAddDto
 import com.example.lojaonline.data.remote.model.UserDto
 import com.example.lojaonline.data.remote.model.UserLoginDto
 import com.example.lojaonline.data.remote.model.UserLoginResponseDto
-import com.example.lojaonline.domain.model.OrderWithDetails
-import com.example.lojaonline.domain.model.User
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -67,12 +65,12 @@ interface LojaOnlineApi {
     suspend fun addCartItem(@Body addToCart: AddToCartDto): Response<CartItemDto>
 
     @POST("order/createOrder")
-    suspend fun createOrder(@Body createOrderRequestDto: CreateOrderRequestDto): Response<OrderWithDetails>
+    suspend fun createOrder(@Body createOrderRequestDto: CreateOrderRequestDto): Response<OrderResponseDto>
 
     @GET("order/getOrderFromUser/{id}")
-    suspend fun getOrderFromUser(userId: Int): Response<OrderWithDetailsDto>
+    suspend fun getOrderFromUser(@Path("id") userId: Int): Response<List<OrderWithDetailsDto>>
 
     @GET("order/getOrderById/{id}")
-    suspend fun getOrderById(orderId: Int): Response<OrderWithDetailsDto>
+    suspend fun getOrderById(@Path("id") orderId: Int): Response<OrderWithDetailsDto>
 
 }

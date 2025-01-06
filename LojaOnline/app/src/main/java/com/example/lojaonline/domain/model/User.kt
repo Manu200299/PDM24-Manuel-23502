@@ -19,12 +19,13 @@ data class User(
 data class UserAdd(
     val username: String,
     val email: String,
+    val token: String,
     val createdAt: String,
     val updatedAt: String,
     val password: String
 ){
     fun toUserAddDto(): UserAddDto{
-        return UserAddDto(username = username, email = email, password = password, createdAt = createdAt, updatedAt = updatedAt)
+        return UserAddDto(username = username, email = email, token = token, password = password, createdAt = createdAt, updatedAt = updatedAt)
     }
 }
 

@@ -91,8 +91,8 @@ fun UserListScreen(
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
                 val formattedDateTime = currentDateTime.format(formatter)
                 val parsedDate = formattedDateTime
-                val newUser = UserAdd(username = "testandroid", email = "testeandroid@foda-se.com", password = "testeandroid", createdAt = formattedDateTime, updatedAt = formattedDateTime)
-                viewModelAdd.registerUser(newUser)
+//                val newUser = UserAdd(username = "testandroid", email = "testeandroid@foda-se.com", password = "testeandroid", createdAt = formattedDateTime, updatedAt = formattedDateTime)
+//                viewModelAdd.registerUser(newUser)
             },
             modifier = Modifier.padding(16.dp)
                 .background(color = Color.Black)

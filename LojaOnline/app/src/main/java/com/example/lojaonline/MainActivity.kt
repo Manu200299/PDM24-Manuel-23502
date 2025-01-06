@@ -21,6 +21,8 @@ import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.presentation.AddAddressScreen
 import com.example.lojaonline.presentation.AddProductScreen
 import com.example.lojaonline.presentation.CartScreen
+import com.example.lojaonline.presentation.OrderDetailsScreen
+import com.example.lojaonline.presentation.OrderListScreen
 import com.example.lojaonline.presentation.ProductListScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
 import java.time.LocalDateTime
@@ -76,6 +78,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onAddProductsClick = {
                                 navController.navigate("addProduct")
+                            },
+                            onViewOrdersClick = {
+                                navController.navigate("orders")
                             }
                         )
                     }
@@ -119,12 +124,32 @@ class MainActivity : ComponentActivity() {
                             sessionManager = sessionManager
                         )
                     }
-                    composable("cart"){
+                    composable("cart") {
                         CartScreen(
                             sessionManager = sessionManager,
                             onBackClick = {
                                 navController.navigateUp()
+                            },
+                        )
+                    }
+                    composable("orders"){
+                        OrderListScreen(
+                            sessionManager = sessionManager,
+                            onOrderClick = {
+                                navController.navigate("orderDetails") // orderDetail implementation
+                            },
+                            onBackClick = {
+                                navController.navigateUp()
                             }
+                        )
+                    }
+                    composable("orderDetails"){
+                        OrderDetailsScreen(
+                            sessionManager = sessionManager,
+                            onBackClick = {
+                                navController.navigateUp()
+                            },
+                            orderId = 2
                         )
                     }
                 }
