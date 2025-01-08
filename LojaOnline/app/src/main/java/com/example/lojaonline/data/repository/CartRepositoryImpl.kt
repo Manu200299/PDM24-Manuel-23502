@@ -18,7 +18,8 @@ class CartRepositoryImpl(private val api: LojaOnlineApi): CartRepository {
             val statusCode = response.code()
             val errorMessage = response.errorBody()?.string() ?: "Unknown error"
             Log.e("CartRepositoryImpl", "Failed to create Cart: HTTP $statusCode - $errorMessage")
-            throw Exception("Failed to create Cart: HTTP $statusCode - $errorMessage")        }
+            throw Exception("Failed to create Cart: HTTP $statusCode - $errorMessage")
+        }
     }
 
     override suspend fun getCartFromUser(userId: Int): List<CartItem>{

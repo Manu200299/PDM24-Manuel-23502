@@ -56,12 +56,11 @@ fun NewsListScreen(
     onNewsClick: (String) -> Unit
 ) {
     val news by viewModel.news.collectAsState()
-    val headerCustomColor = Color(0xFF0061b0)
 
     LaunchedEffect(Unit) {
         viewModel.fetchNews()
     }
-    // Main Column
+
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -70,30 +69,30 @@ fun NewsListScreen(
         // Top Header
         Row(
             modifier = Modifier
-                .background(color = headerCustomColor)
+                .background(color = Color(0xFF0061b0))
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Top Header Text
             Text(
                 text = "Recent News",
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.headlineSmall)
         }
-        // Column that will lsit the news
+
+        // News List
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
             items(news) { news ->
-                Log.d("NewsListScreen", "Rendering article: ${news.title}")
-                NewsItem(news = news, onClick ={ onNewsClick(news.url)})
+                NewsItem(news = news, onClick = { onNewsClick(news.url) })
             }
         }
     }
 }
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalGlideComposeApi::class)

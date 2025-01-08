@@ -54,7 +54,8 @@ class CartViewModel(
                     userID = userId,
                     productID = productId,
                     quantity = quantity,
-                    isShared = false // You can make this configurable if needed
+                    isShared = false, // You can make this configurable if needed
+                    sharedToken = "noToken"
                 )
                 val addedItem = addToCartUseCase(cartItem)
                 _addToCartState.value = AddToCartState.Success(addedItem)

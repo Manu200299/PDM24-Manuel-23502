@@ -9,10 +9,9 @@ data class CartItem(
     val quantity: Int,
     val isShared: Boolean,
     val productName: String,
-    val productPrice: Double
 ){
     fun toCartItemDto(): CartItemDto{
-        return CartItemDto(userID = userID, productID = productID, quantity = quantity, isShared = isShared, productName, productPrice)
+        return CartItemDto(userID = userID, productID = productID, quantity = quantity, isShared = isShared, productName)
 
     }
 }
@@ -21,10 +20,11 @@ data class AddToCart(
     val userID: Int,
     val productID: Int,
     val quantity: Int,
-    val isShared: Boolean
+    val isShared: Boolean,
+    val sharedToken: String
 ){
     fun toCartItemDto(): AddToCartDto{
-        return AddToCartDto(userID = userID, productID = productID, quantity = quantity, isShared = isShared)
+        return AddToCartDto(userID = userID, productID = productID, quantity = quantity, isShared = isShared, sharedToken = sharedToken)
 
     }
 }

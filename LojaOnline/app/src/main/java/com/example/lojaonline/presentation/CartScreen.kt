@@ -86,7 +86,7 @@ fun CartItemRow(item: CartItem) {
                 Text(text = item.productName, style = MaterialTheme.typography.titleMedium)
                 Text(text = "Quantity: ${item.quantity}", style = MaterialTheme.typography.bodyMedium)
             }
-            Text(text = "$${item.productPrice}", style = MaterialTheme.typography.titleMedium)
+//            Text(text = "$${item.productPrice}", style = MaterialTheme.typography.titleMedium) needs to fetch productprice from produict
         }
     }
 }
