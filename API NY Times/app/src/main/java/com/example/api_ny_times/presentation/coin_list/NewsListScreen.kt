@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.api_ny_times.domain.model.ArticlesList
 import com.example.api_ny_times.domain.model.News
 import java.time.Instant
 import java.time.temporal.ChronoUnit
@@ -97,7 +98,7 @@ fun NewsListScreen(
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun NewsItem(news: News, onClick: () -> Unit){
+fun NewsItem(news: ArticlesList, onClick: () -> Unit){
     var isClicked by remember { mutableStateOf(false) }
 
     // News List Card

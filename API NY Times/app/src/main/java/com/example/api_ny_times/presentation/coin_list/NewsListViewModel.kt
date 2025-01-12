@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.api_ny_times.data.remote.api.RetrofitInstance
 import com.example.api_ny_times.data.repository.NewsRepositoryImpl
+import com.example.api_ny_times.domain.model.ArticlesList
 import com.example.api_ny_times.domain.model.News
 import com.example.api_ny_times.domain.repository.NewsRepository
 import com.example.api_ny_times.domain.use_case.GetNewsUseCase
@@ -16,7 +17,7 @@ class NewsListViewModel: ViewModel() {
     private val repository = NewsRepositoryImpl(api)
     private val getNewsUseCase = GetNewsUseCase(repository)
 
-    val news = MutableStateFlow<List<News>>(emptyList())
+    val news = MutableStateFlow<List<ArticlesList>>(emptyList())
 
     fun fetchNews() {
         viewModelScope.launch {

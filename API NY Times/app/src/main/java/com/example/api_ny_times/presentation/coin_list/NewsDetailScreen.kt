@@ -1,6 +1,5 @@
 package com.example.api_ny_times.presentation.coin_list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,20 +13,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.api_ny_times.domain.model.News
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.api_ny_times.domain.model.ArticlesList
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun NewsDetailScreen(
     newsUrl: String?,
-    allNews: List<News>,
+    allNews: List<ArticlesList>,
     viewModel: NewsDetailViewModel = viewModel()
 ) {
     // Load news into the ViewModel
