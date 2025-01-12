@@ -33,7 +33,7 @@ data class SourceDto(
 // App Rework (09/01/2025)
 
 data class NewsResponseDto(
-    val status: String, // Usually ok
+    val status: String, // Usually returns ok
     val totalResults: Int,
     val articles: List<ArticlesListDto> // Lists the actual articles details
 )

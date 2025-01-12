@@ -1,5 +1,6 @@
 package com.example.api_ny_times
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,46 +25,39 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppNavigation()
+            val newsListViewModel: NewsListViewModel = viewModel()
+            AppNavigation(newsListViewModel)
         }
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavigation() {
+fun AppNavigation(newsListViewModel: NewsListViewModel) {
     val navController = rememberNavController()
-    val newsListViewModel: NewsListViewModel = viewModel()
-    val news = newsListViewModel.news.collectAsState().value
 
     NavHost(navController = navController, startDestination = "news_list") {
         composable("news_list") {
             NewsListScreen(
-                onNewsClick = { url ->
-                    val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
+                viewModel = newsListViewModel,
+                onNewsClick = { article ->
+                    val encodedUrl = Uri.encode(article.url)
                     navController.navigate("news_detail/$encodedUrl")
                 }
             )
         }
         composable(
-            route = "news_detail/{newsUrl}",
-            arguments = listOf(navArgument("newsUrl") { type = NavType.StringType })
+            route = "news_detail/{encodedUrl}",
+            arguments = listOf(navArgument("encodedUrl") { type = NavType.StringType })
         ) { backStackEntry ->
-            val encodedUrl = backStackEntry.arguments?.getString("newsUrl")
-            val newsUrl = encodedUrl?.let {
-                java.net.URLDecoder.decode(it, StandardCharsets.UTF_8.toString())
+            val encodedUrl = backStackEntry.arguments?.getString("encodedUrl")
+            val decodedUrl = encodedUrl?.let { Uri.decode(it) }
+            decodedUrl?.let { url ->
+                newsListViewModel.getArticleByUrl(url)?.let { article ->
+                    NewsDetailScreen(article = article)
+                }
             }
-            NewsDetailScreen(newsUrl = newsUrl, allNews = news)
         }
     }
-}
-
-
-
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun DefaultPreview() {
-    AppNavigation()
 }
 

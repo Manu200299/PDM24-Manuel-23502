@@ -54,7 +54,7 @@ import java.time.temporal.ChronoUnit
 @Composable
 fun NewsListScreen(
     viewModel: NewsListViewModel = viewModel(),
-    onNewsClick: (String) -> Unit
+    onNewsClick: (ArticlesList) -> Unit
 ) {
     val news by viewModel.news.collectAsState()
 
@@ -87,8 +87,11 @@ fun NewsListScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            items(news) { news ->
-                NewsItem(news = news, onClick = { onNewsClick(news.url) })
+            items(news) { article ->
+                NewsItem(article = article, onClick = {
+                    Log.d("NewsListScreen", "Navigating to ${article.url}")
+                    onNewsClick(article)
+                })
             }
         }
     }
@@ -98,7 +101,7 @@ fun NewsListScreen(
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun NewsItem(news: ArticlesList, onClick: () -> Unit){
+fun NewsItem(article: ArticlesList, onClick: () -> Unit){
     var isClicked by remember { mutableStateOf(false) }
 
     // News List Card
@@ -114,7 +117,7 @@ fun NewsItem(news: ArticlesList, onClick: () -> Unit){
         Column {
             // UrlToImage thumbnail
             GlideImage(
-                model = news.urlToImage,
+                model = article.urlToImage,
                 contentDescription = "NewsThumbnail",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -129,7 +132,7 @@ fun NewsItem(news: ArticlesList, onClick: () -> Unit){
             ) {
                 // News Title
                 Text(
-                    text = news.title,
+                    text = article.title,
                     style = MaterialTheme.typography.titleMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -139,15 +142,15 @@ fun NewsItem(news: ArticlesList, onClick: () -> Unit){
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-//                    Text( -> Not working due to "source" on JSON response
-//                        text = news.name,
-//                        style = MaterialTheme.typography.bodySmall,
-//                        color = MaterialTheme.colorScheme.onSurfaceVariant
-//                    )
+                    Text(
+                        text = article.source.name,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
 
                     Text(
 //                        text = "${ChronoUnit.MINUTES.between(news.publishedAt, Instant.now())} minutes ago",
-                        text = "Published at ${news.publishedAt}",
+                        text = "Published at ${article.publishedAt}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

@@ -48,4 +48,5 @@ data class NewsResponse(
 interface NewsApi {
     @GET("v2/top-headlines?country=us&apiKey=ffcf6c2cb8c743669c8b3e30b5fa6328")
     suspend fun getNews(): NewsResponseDto
+
 }
