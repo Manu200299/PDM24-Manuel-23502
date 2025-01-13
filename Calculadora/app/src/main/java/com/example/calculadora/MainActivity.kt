@@ -64,8 +64,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Calculator(modifier: Modifier = Modifier) {
     // Variables
-    var currentInput by remember { mutableStateOf("") }
-    var previousInput by remember { mutableStateOf("") }
+    var currentInput by remember { mutableStateOf("") } // Stores the current number
+    var previousInput by remember { mutableStateOf("") } // Stores the number before operation (first number)
     var operation by remember { mutableStateOf<String?>(null) }
     var result by remember { mutableStateOf("") }
     var memory by remember { mutableStateOf(0.0) }
@@ -93,7 +93,7 @@ fun Calculator(modifier: Modifier = Modifier) {
             }
 
             // Button click handling logic
-            fun handleButtonClick(button: String) {
+            fun handleButtonClick(button: String) { // When = "", it rests the current input
                 when {
                     button in "0123456789." -> {
                         currentInput = handleNumberInput(button, currentInput)
@@ -126,7 +126,6 @@ fun Calculator(modifier: Modifier = Modifier) {
                     button == "√" -> {
                         currentInput = handleSquareroot(currentInput)
                     }
-                    // Add more cases here if needed
                 }
             }
 
