@@ -30,7 +30,7 @@ class UserProfileViewModel(
         loadUserProfile()
     }
 
-    private fun loadUserProfile() {
+    fun loadUserProfile() {
         viewModelScope.launch {
             _profileState.value = ProfileState.Loading
             try {
