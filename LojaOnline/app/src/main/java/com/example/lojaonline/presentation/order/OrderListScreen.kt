@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.order
 
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.OrderWithDetails
@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel

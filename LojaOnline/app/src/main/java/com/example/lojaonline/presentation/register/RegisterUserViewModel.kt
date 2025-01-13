@@ -1,3 +1,5 @@
+package com.example.lojaonline.presentation.register
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

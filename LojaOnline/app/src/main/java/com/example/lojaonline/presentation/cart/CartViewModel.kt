@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.data.remote.api.RetrofitInstance
 import com.example.lojaonline.data.repository.CartRepositoryImpl
-import com.example.lojaonline.data.repository.UserRepositoryImpl
 import com.example.lojaonline.domain.model.AddToCart
 import com.example.lojaonline.domain.model.CartItem
 import com.example.lojaonline.domain.use_case.AddToCartUseCase

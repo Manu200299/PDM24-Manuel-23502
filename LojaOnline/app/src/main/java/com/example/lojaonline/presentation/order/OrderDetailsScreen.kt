@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.order
 
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.OrderDetail

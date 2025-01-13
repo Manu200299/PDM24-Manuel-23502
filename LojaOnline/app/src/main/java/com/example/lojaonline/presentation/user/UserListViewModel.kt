@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.user
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

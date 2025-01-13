@@ -2,10 +2,12 @@ package com.example.lojaonline.data.remote.api
 
 
 import com.example.lojaonline.data.remote.model.AddProductDto
+import com.example.lojaonline.data.remote.model.AddSharedCartRequestDto
 import com.example.lojaonline.data.remote.model.AddToCartDto
 import com.example.lojaonline.data.remote.model.AddressDto
 import com.example.lojaonline.data.remote.model.CartItemDto
 import com.example.lojaonline.data.remote.model.CreateOrderRequestDto
+import com.example.lojaonline.data.remote.model.CreateSharedCartResponseDto
 import com.example.lojaonline.data.remote.model.OrderResponseDto
 import com.example.lojaonline.data.remote.model.OrderWithDetailsDto
 import com.example.lojaonline.data.remote.model.ProductDto
@@ -13,12 +15,12 @@ import com.example.lojaonline.data.remote.model.UserAddDto
 import com.example.lojaonline.data.remote.model.UserDto
 import com.example.lojaonline.data.remote.model.UserLoginDto
 import com.example.lojaonline.data.remote.model.UserLoginResponseDto
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -72,5 +74,11 @@ interface LojaOnlineApi {
 
     @GET("order/getOrderById/{id}")
     suspend fun getOrderById(@Path("id") orderId: Int): Response<OrderWithDetailsDto>
+
+    @POST("sharedcart/shareCart/{userId}")
+    suspend fun shareCart(@Path("userId") userId: Int): Response<CreateSharedCartResponseDto>
+
+    @POST("sharedcart/addSharedCart")
+    suspend fun addSharedCart(@Body request: AddSharedCartRequestDto): Response<Unit>
 
 }

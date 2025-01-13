@@ -1,6 +1,7 @@
 package com.example.lojaonline
 
-import RegisterUserScreen
+import com.example.lojaonline.presentation.register.RegisterUserScreen
+import com.example.lojaonline.presentation.user.UserProfileScreen
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,22 +12,19 @@ import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.example.lojaonline.presentation.LoginUserScreen
-import com.example.lojaonline.presentation.UserProfileScreen
+import com.example.lojaonline.presentation.login.LoginUserScreen
 import com.example.lojaonline.data.local.SessionManager
-import com.example.lojaonline.presentation.AddAddressScreen
-import com.example.lojaonline.presentation.AddProductScreen
-import com.example.lojaonline.presentation.CartScreen
-import com.example.lojaonline.presentation.OrderDetailsScreen
-import com.example.lojaonline.presentation.OrderListScreen
-import com.example.lojaonline.presentation.ProductListScreen
+import com.example.lojaonline.presentation.address.AddAddressScreen
+import com.example.lojaonline.presentation.product.AddProductScreen
+import com.example.lojaonline.presentation.cart.CartScreen
+import com.example.lojaonline.presentation.order.OrderDetailsScreen
+import com.example.lojaonline.presentation.order.OrderListScreen
+import com.example.lojaonline.presentation.product.ProductListScreen
+import com.example.lojaonline.presentation.sharedCart.SharedCartScreen
 import com.example.lojaonline.ui.theme.LojaOnlneTheme
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -130,6 +128,12 @@ class MainActivity : ComponentActivity() {
                             onBackClick = {
                                 navController.navigateUp()
                             },
+                            onShareCartClick = {
+                                navController.navigate("shareCart")
+                            },
+                            onAddSharedCartClick = {
+                                navController.navigate("addSharedCart")
+                            }
                         )
                     }
                     composable("orders"){
@@ -149,7 +153,23 @@ class MainActivity : ComponentActivity() {
                             onBackClick = {
                                 navController.navigateUp()
                             },
-                            orderId = 2
+                            orderId = 2 // NEEDS TO FIX
+                        )
+                    }
+                    composable("shareCart") {
+                        SharedCartScreen(
+                            sessionManager = sessionManager,
+                            onNavigateBack = {
+                                navController.navigateUp()
+                            },
+                        )
+                    }
+                    composable("addSharedCart") {
+                        SharedCartScreen(
+                            sessionManager = sessionManager,
+                            onNavigateBack = {
+                                navController.navigateUp()
+                            },
                         )
                     }
                 }

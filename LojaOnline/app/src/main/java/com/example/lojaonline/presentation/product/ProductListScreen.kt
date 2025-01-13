@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.product
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.Product
+import com.example.lojaonline.presentation.cart.AddToCartState
+import com.example.lojaonline.presentation.cart.CartViewModel
 
 @Composable
 fun ProductListScreen(

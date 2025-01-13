@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.product
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*

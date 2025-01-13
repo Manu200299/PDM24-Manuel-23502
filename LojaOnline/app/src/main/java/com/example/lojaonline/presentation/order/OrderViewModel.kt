@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.order
 
 import com.example.lojaonline.data.local.SessionManager
 import com.example.lojaonline.domain.model.OrderResponse
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.lojaonline.data.repository.OrderRepositoryImpl
 import com.example.lojaonline.data.remote.api.RetrofitInstance
-import com.example.lojaonline.domain.model.CreateOrderRequest
 import com.example.lojaonline.domain.model.OrderWithDetails
 import com.example.lojaonline.domain.use_case.GetOrdersFromUserUseCase
 import com.example.lojaonline.domain.use_case.GetOrderByIdUseCase

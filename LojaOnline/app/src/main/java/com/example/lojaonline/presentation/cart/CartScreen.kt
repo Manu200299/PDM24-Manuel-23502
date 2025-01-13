@@ -1,4 +1,4 @@
-package com.example.lojaonline.presentation
+package com.example.lojaonline.presentation.cart
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +15,9 @@ import com.example.lojaonline.domain.model.CartItem
 @Composable
 fun CartScreen(
     sessionManager: SessionManager,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onShareCartClick: () -> Unit,
+    onAddSharedCartClick: () -> Unit
 ) {
     val viewModel: CartViewModel = viewModel(
         factory = CartViewModel.Factory(sessionManager)
@@ -58,6 +60,20 @@ fun CartScreen(
         }
 
         Spacer(modifier = Modifier.weight(1f))
+
+        Button(
+            onClick = onShareCartClick,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        ) {
+            Text("Share Cart")
+        }
+
+        Button(
+            onClick = onAddSharedCartClick,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        ) {
+            Text("Add Shared Cart")
+        }
 
         Button(
             onClick = onBackClick,
